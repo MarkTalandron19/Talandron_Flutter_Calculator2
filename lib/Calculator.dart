@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
@@ -159,7 +160,10 @@ class _CalculatorState extends State<Calculator> {
                             child: const Text(".")),
                         TextButton(onPressed: () {
                           setState(() {
-                            
+                            ContextModel cm = ContextModel();
+                            Parser p = Parser();
+                            Expression exp = p.parse(history);
+                            output = exp.evaluate(EvaluationType.REAL, cm).toString();
                           });
                         }, child: const Text("=")),
                         TextButton(
