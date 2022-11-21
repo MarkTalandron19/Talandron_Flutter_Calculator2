@@ -9,8 +9,7 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  String history = "";
-  String output = "0";
+  String output = "";
 
   @override
   Widget build(BuildContext context) {
@@ -21,39 +20,25 @@ class _CalculatorState extends State<Calculator> {
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          const SizedBox(
+            height: 50,
+          ),
           Row(
             children: [
               const SizedBox(
                 width: 5,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 390,
-                    height: 50,
-                    child: Text(
-                      history,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 25,
-                      ),
-                    ),
+              SizedBox(
+                width: 300,
+                height: 50,
+                child: Text(
+                  output,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 30,
                   ),
-                  SizedBox(
-                    width: 390,
-                    height: 50,
-                    child: Text(
-                      output,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 35,
-                      ),
-                    ),
-                  ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
           const Expanded(
@@ -71,8 +56,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "";
-                            output = "0";
+                            output = "";
                           });
                         },
                         child: const Text(
@@ -89,7 +73,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history(";
+                            output = "$output(";
                           });
                         },
                         child: const Text(
@@ -106,7 +90,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history)";
+                            output = "$output)";
                           });
                         },
                         child: const Text(
@@ -120,20 +104,18 @@ class _CalculatorState extends State<Calculator> {
                 TableCell(
                   child: SizedBox(
                     height: kToolbarHeight,
-                    child: TextButton(
+                    child: IconButton(
                         onPressed: () {
                           setState(() {
-                            if (history.isNotEmpty) {
-                              history =
-                                  history.substring(0, history.length - 1);
+                            if (output.isNotEmpty) {
+                              output =
+                                  output.substring(0, output.length - 1);
                             }
                           });
                         },
-                        child: const Text(
-                          "Back",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
+                        icon: const Icon(
+                          Icons.backspace_outlined,
+                          color: Colors.green,
                         )),
                   ),
                 ),
@@ -145,7 +127,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}7";
+                            output = "${output}7";
                           });
                         },
                         child: const Text(
@@ -162,7 +144,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}8";
+                            output = "${output}8";
                           });
                         },
                         child: const Text(
@@ -179,7 +161,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}9";
+                            output = "${output}9";
                           });
                         },
                         child: const Text(
@@ -196,7 +178,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history/";
+                            output = "$output/";
                           });
                         },
                         child: const Text(
@@ -215,7 +197,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}4";
+                            output = "${output}4";
                           });
                         },
                         child: const Text(
@@ -232,7 +214,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}5";
+                            output = "${output}5";
                           });
                         },
                         child: const Text(
@@ -249,7 +231,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}6";
+                            output = "${output}6";
                           });
                         },
                         child: const Text(
@@ -266,7 +248,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history*";
+                            output = "$output*";
                           });
                         },
                         child: const Text(
@@ -285,7 +267,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}1";
+                            output = "${output}1";
                           });
                         },
                         child: const Text(
@@ -302,7 +284,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}2";
+                            output = "${output}2";
                           });
                         },
                         child: const Text(
@@ -319,7 +301,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}3";
+                            output = "${output}3";
                           });
                         },
                         child: const Text(
@@ -336,7 +318,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history-";
+                            output = "$output-";
                           });
                         },
                         child: const Text(
@@ -355,7 +337,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "${history}0";
+                            output = "${output}0";
                           });
                         },
                         child: const Text(
@@ -372,7 +354,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history.";
+                            output = "$output.";
                           });
                         },
                         child: const Text(
@@ -388,7 +370,7 @@ class _CalculatorState extends State<Calculator> {
                     height: kToolbarHeight,
                     child: TextButton(
                         onPressed: () {
-                          if (history.isEmpty) {
+                          if (output.isEmpty) {
                             setState(() {
                               output = "0";
                             });
@@ -396,7 +378,7 @@ class _CalculatorState extends State<Calculator> {
                             setState(() {
                               ContextModel cm = ContextModel();
                               Parser p = Parser();
-                              Expression exp = p.parse(history);
+                              Expression exp = p.parse(output);
                               output = exp
                                   .evaluate(EvaluationType.REAL, cm)
                                   .toString();
@@ -417,7 +399,7 @@ class _CalculatorState extends State<Calculator> {
                     child: TextButton(
                         onPressed: () {
                           setState(() {
-                            history = "$history+";
+                            output = "$output+";
                           });
                         },
                         child: const Text(
