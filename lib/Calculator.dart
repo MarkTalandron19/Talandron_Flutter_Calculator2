@@ -108,8 +108,7 @@ class _CalculatorState extends State<Calculator> {
                         onPressed: () {
                           setState(() {
                             if (output.isNotEmpty) {
-                              output =
-                                  output.substring(0, output.length - 1);
+                              output = output.substring(0, output.length - 1);
                             }
                           });
                         },
@@ -375,14 +374,20 @@ class _CalculatorState extends State<Calculator> {
                               output = "0";
                             });
                           } else {
-                            setState(() {
-                              ContextModel cm = ContextModel();
-                              Parser p = Parser();
-                              Expression exp = p.parse(output);
-                              output = exp
-                                  .evaluate(EvaluationType.REAL, cm)
-                                  .toString();
-                            });
+                            try {
+                              setState(() {
+                                ContextModel cm = ContextModel();
+                                Parser p = Parser();
+                                Expression exp = p.parse(output);
+                                output = exp
+                                    .evaluate(EvaluationType.REAL, cm)
+                                    .toString();
+                              });
+                            } on FormatException {
+                              displayError(context);
+                            } on RangeError {
+                              displayError(context);
+                            }
                           }
                         },
                         child: const Text(
@@ -416,5 +421,35 @@ class _CalculatorState extends State<Calculator> {
         ]),
       ),
     );
+  }
+
+  Future<void> displayError(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: ((context) {
+          return AlertDialog(
+            title: const Text(
+              "Error",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.red,
+              ),
+            ),
+            content: const Text("That is not a math expression.",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                )),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("OK"),
+              )
+            ],
+          );
+        }));
   }
 }
